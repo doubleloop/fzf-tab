@@ -310,8 +310,8 @@ zle -C _fzf_tab_complete complete-word _fzf_tab_complete
 
 # note: this function is called with user options
 _fzf_tab_try_custom_completion() {
-    # do not steal fzf's completions
-    [[ $LBUFFER != *"${FZF_COMPLETION_TRIGGER-**}" ]] || return
+    [[ $_fzf_tab_orig_widget != 'fzf-completion' \
+        || $LBUFFER != *"${FZF_COMPLETION_TRIGGER-**}" ]] || return
     local func prefix lbuf
     () {
         emulate -L zsh
